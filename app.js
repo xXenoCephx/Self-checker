@@ -27,6 +27,11 @@ const app = express();
 * 3. 'defaultLayout' specifies the main.handlebars file under views/layouts as the main template
 *
 * */
+//Self checker stuff
+const selfCheckDB=require("./config/DBConnect");
+selfCheckDB.setUpDB(false);
+
+
 app.engine('handlebars', exphbs({
 	defaultLayout: 'main' // Specify default template views/layout/main.handlebar 
 }));
