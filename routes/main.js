@@ -20,5 +20,7 @@ router.get("/logout"),(req,res)=>{
 	req.logout();
 	res.redirect("/");
 };
-
+router.get("/dankeDonation",(req,res)=>{
+	res.render("donation/dankeDonate");
+})
 module.exports = router;

@@ -28,9 +28,12 @@ const app = express();
 *
 * */
 //Self checker stuff
+const mySQLStore=require("express-mysql-session");
+const db=require("./config/db");
 const selfCheckDB=require("./config/DBConnect");
-selfCheckDB.setUpDB(false);
 
+selfCheckDB.setUpDB(false);
+app.use(express.static("public/img"));
 
 app.engine('handlebars', exphbs({
 	defaultLayout: 'main' // Specify default template views/layout/main.handlebar 
@@ -57,7 +60,7 @@ app.use(session({
 	key: 'Corona_session',
 	secret: 'St0puVerus',
 	resave: false,
-	saveUninitialized: false,
+	saveUninitialized: false
 }));
 
 // Place to define global variables - not used in practical 1
