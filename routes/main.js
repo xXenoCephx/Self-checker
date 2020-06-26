@@ -3,7 +3,7 @@ const router = express.Router();
 
 router.get('/', (req, res) => {
 	const title = 'Coronavirus';
-	res.render('home', {title: title}) // views/home.handlebars
+	res.render('index', {title: title}) // views/home.handlebars
 });
 //Donate
 router.get("/whyDonate",(req,res)=>{
@@ -20,7 +20,5 @@ router.get("/logout"),(req,res)=>{
 	req.logout();
 	res.redirect("/");
 };
-router.get("/dankeDonation",(req,res)=>{
-	res.render("donation/dankeDonate");
-})
+
 module.exports = router;

@@ -10,7 +10,7 @@ const bodyParser = require('body-parser');
 * will be called based on the HTTP request and URL.
 */
 const mainRoute = require('./routes/main');
-
+const donRoute=require("./routes/donate");
 /*
 * Creates an Express server - Express is a web application framework for creating web applications
 * in Node JS.
@@ -27,13 +27,15 @@ const app = express();
 * 3. 'defaultLayout' specifies the main.handlebars file under views/layouts as the main template
 *
 * */
+
 //Self checker stuff
 const mySQLStore=require("express-mysql-session");
 const db=require("./config/db");
 const selfCheckDB=require("./config/DBConnect");
 
 selfCheckDB.setUpDB(false);
-app.use(express.static("public/img"));
+app.use('/donation',donRoute);
+
 
 app.engine('handlebars', exphbs({
 	defaultLayout: 'main' // Specify default template views/layout/main.handlebar 

@@ -7,11 +7,11 @@
         </span>
     </div>
     <div>
-    <form class="pull-right bg" method="post" action="/donating"> 
+    <form class="pull-right bg" method="post" action="/donation/donating"> 
         <h3>Buy a drink for us to keep this running</h3>
         <div class="form-group">
             <span>-</span>
-            <input type="number" name="donCupQty" min="1" step="1" value="1">
+            <input type="number" name="donCupQty" min="1" step="1" value="{{donCupQty}}">
             <span>+</span>
             <div class="pull-right">
                 <span class="donCupAmt">$2 a cup</span><br>
@@ -24,13 +24,13 @@
         </div>
         <div class="form-group">
             <label for="DonMsg">Your message to us</label>
-            <input type="text" name="DonMsg" placeholder="(Optional)">
+            <input type="text" name="donMsg" placeholder="(Optional)">
         </div>
         <div class="form-group">
             <label for="DonName">Your Name for display</label>
-            <input type="text" name="DonName" placeholder="(Optional)">
+            <input type="text" name="donName" placeholder="(Optional)">
         </div>
-        <button type="purchase" class="btn btn-primary">Buy</button>
+        <button type="submit" class="btn btn-primary">Buy</button>
     </form>
     </div>
 </div>
