@@ -1,0 +1,45 @@
+.logo{
+  width:130px;
+  margin:auto;
+}
+
+table{
+  border: 1px solid black;
+  margin-right: 80px;
+  overflow: hidden;
+}
+
+.tables{
+  width: 100%;
+}
+
+th{
+  padding-right: 50px;
+  word-break: break-all;
+  min-width: 150px;
+  max-width: 150px;
+}
+
+.post{
+  min-height: 2em;
+  max-height: 8em;
+  width: 100%;
+}
+
+.date{
+  text-align: right;
+  padding-right: 5px;
+  padding-left: 50px;
+}
+
+input[type=text]{
+  width: 83%;
+}
+
+.showtext, .commtext, .postText{
+  word-break: break-all;
+}
+
+.showtext{
+  max-height: 3.6em;
+}

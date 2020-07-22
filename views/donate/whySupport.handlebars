@@ -1,0 +1,36 @@
+<div>
+    <div class="donDesc pull-left">
+        <h3 class="text-centre">Why Donate?</h3>
+        <p>It keeps us afloat...</p>
+        <span>
+            Soon to be log of donaters
+        </span>
+    </div>
+    <div>
+        <form class="pull-right bg" action="/donate/processPayment"  method="post"> 
+            <h3>Buy a drink for us to keep this running</h3>
+            <div class="form-group">
+                <span>-</span>
+                <input type="number" name="donAmt" defaultValue="1" min="1" step="1" value="{{value}}">
+                <span>+</span>
+                <div class="pull-right">
+                    <span class="">$2 a cup</span><br>
+                    <span class="">Total: $2</span>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="donEmail">Your email for us to confirm</label>
+                <input type="email" name="donEmail" class="form-control " placeholder="example@gmail.com" required>
+            </div>
+            <div class="form-group">
+                <label for="DonMsg">Your message to us</label>
+                <input type="text" name="donMsg" placeholder="(Optional)">
+            </div>
+            <div class="form-group">
+                <label for="DonName">Your Name for display</label>
+                <input type="text" name="donName" placeholder="(Optional)">
+            </div>
+            <button type="submit" class="btn btn-primary">Buy</button>
+        </form>
+    </div>
+</div>

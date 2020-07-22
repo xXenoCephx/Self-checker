@@ -1,0 +1,29 @@
+<div>
+    <div class = "card card-body">
+        <div class="container">
+            <div class="col-lg-1 col-mg-1 col-sm-12"></div>
+            <div class="col-lg-6 col-mg-6 col-sm-12">
+                <form action = "./feedback" method="POST">
+                    <div class = "form-group">
+                        <label for="subject">Subject</label>
+                        <input type="text" class='form-control' name='subject' value="{{subject}}" required>
+                    </div>
+                    <div class = "form-group">
+                        <label for="text">Feedback</label>
+                        <div>
+                            <textarea class="form-control" name="feedback" value="{{feedback}}" placeholder="Feedback"></textarea>
+                        </div>
+                    </div>
+                        <button type="submit" class="btn btn-danger">Feedback</button>
+                </form>
+            </div>
+            <div class="col-lg-4 col-mg-4 col-sm-12">
+                <table>
+                    <tr><th>Notes:</th></tr>
+                    <tr><td>Please do give your honest feedback. Should it be negative, explain why and how the site is unhelpful to you. Unhelpful feedback will be ignored</td></tr>
+                </table>
+            </div>
+            <div class="col-lg-1 col-mg-1 col-sm-12"></div>
+        </div>
+    </div>
+</div>

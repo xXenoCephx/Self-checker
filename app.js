@@ -1,3 +1,7 @@
+/*
+* 'require' is similar to import used in Java and Python. It brings in the libraries required to be used
+* in this JS file.
+* */
 const express = require('express');
 const session = require('express-session');
 const path = require('path');
@@ -5,12 +9,24 @@ const exphbs = require('express-handlebars');
 const methodOverride = require('method-override');
 const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
+const Handles = require("handlebars");
+const {allowInsecurePrototypeAccess} = require('@handlebars/allow-prototype-access');
+const communityDB = require('./config/DBConnection');
+const MySQLStore = require('express-mysql-session');
+const db = require("./config/db");
+
+communityDB.setUpDB(false)
+
 /*
 * Loads routes file main.js in routes directory. The main.js determines which function
 * will be called based on the HTTP request and URL.
 */
+
 const mainRoute = require('./routes/main');
-const donRoute=require("./routes/donate");
+const communityRoute = require('./routes/community');
+const donateRoute=require("./routes/donate");
+const {formatDate} = require("./helpers/hbs")
+
 /*
 * Creates an Express server - Express is a web application framework for creating web applications
 * in Node JS.
@@ -28,18 +44,14 @@ const app = express();
 *
 * */
 
-//Self checker stuff
-const mySQLStore=require("express-mysql-session");
-const db=require("./config/db");
-const selfCheckDB=require("./config/DBConnect");
-
-selfCheckDB.setUpDB(false);
-app.use('/donation',donRoute);
-
-
-app.engine('handlebars', exphbs({
-	defaultLayout: 'main' // Specify default template views/layout/main.handlebar 
+app.engine("handlebars", exphbs({
+	helpers: {
+		formatDate: formatDate
+	},
+	defaultLayout: "main",
+	handlebars: allowInsecurePrototypeAccess(Handles)
 }));
+
 app.set('view engine', 'handlebars');
 
 // Body parser middleware to parse HTTP body in order to read HTTP data
@@ -57,14 +69,24 @@ app.use(methodOverride('_method'));
 // Enables session to be stored using browser's Cookie ID
 app.use(cookieParser());
 
-// To store session information. By default it is stored as a cookie on browser
 app.use(session({
-	key: 'Corona_session',
-	secret: 'St0puVerus',
+	key: 'community_session',
+	secret: 'tojiv',
+	store: new MySQLStore({
+		host: db.host,
+		port: 3306,
+		user: db.username,
+		password: db.password,
+		database: db.database,
+		clearExpired: true,
+		checkExpirationInterval: 900000,
+		expiration: 900000
+	}),
 	resave: false,
-	saveUninitialized: false
+	saveUninitialized: false,
 }));
 
+// To store session information. By default it is stored as a cookie on browser
 // Place to define global variables - not used in practical 1
 app.use(function (req, res, next) {
 	next();
@@ -74,14 +96,16 @@ app.use(function (req, res, next) {
 /*
 * Defines that any root URL with '/' that Node JS receives request from, for eg. http://localhost:5000/, will be handled by
 * mainRoute which was defined earlier to point to routes/main.js
-* */
-app.use('/', mainRoute); // mainRoute is declared to point to routes/main.js
+* */ // mainRoute is declared to point to routes/main.js
 // This route maps the root URL to any path defined in main.js
-
+app.use("/", mainRoute)
+app.use('/community', communityRoute)
+app.use("/donate",donateRoute)
 /*
 * Creates a unknown port 5000 for express server since we don't want our app to clash with well known
 * ports such as 80 or 8080.
 * */
+
 const port = 5000;
 
 // Starts the server and listen to port 5000

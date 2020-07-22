@@ -1,0 +1,30 @@
+<div class="container">
+    <div class="col-lg-1 col-mg-1 col-sm-1"></div>
+    <div class="col-lg-6 col-mg-6 col-sm-8">
+        <div>
+            <table class="post">
+                <tr><th>{{title}}</th><td>{{type}}</td><td class="date">Posted on: {{formatDate date "DD/MM/YYYY"}}</td></tr>
+                <tr><td colspan="3" class="postText">{{text}}</td></tr>
+            </table>
+        </div>
+        <div>
+            <form action="./{{id}}" method="POST">
+                <input width="120" type="text" name="comment" class="comment" placeholder="Add a comment" value="{{comment}}"><button type="submit" class="btn btn-primary">Comment</button>
+            </form>
+        </div>
+        <div>
+            {{#each commentDB}}
+                <table class="tables">
+                    <tr><th class="commth"></th><td class="date">Commented on: {{formatDate date "DD/MM/YYYY"}}</td></tr>
+                    <tr><td colspan="2" class="commtd" class="commtext">{{comment}}</td></tr>
+                </table>
+            {{/each}}
+        </div>
+    </div>
+    <div class="col-lg-4 col-mg-4 col-sm-3">
+        <table>
+            <tr><td><a href="/community/create">Create</a></td></tr>
+            <tr><td><a href="/community/feedback">Feedback</a></td></tr>
+        </table>
+    </div>
+</div>

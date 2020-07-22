@@ -1,25 +1,32 @@
-const passport=require("passport");
 const express=require("express");
 const router=express.Router();
-const Donation=require("../models/Donation");
+const payup=require("../models/Support/Payup")
 
-router.get("/dankeDonation",(req,res)=>{
-	res.render("./donation/dankeDonate");
+router.get("/SupportUs",(req,res)=>{
+    res.render("./donate/whySupport");
+});
+router.get("/ThanksForSupporting",(req,res)=>{
+    res.render("./donate/postSupport");
 })
-router.post("/donating",(req,res)=>{
-    let amount=req.body.donCupQty;
+router.post("/processPayment",(req,res,next)=>{
+    let amt=req.body.donAmt;
     let email=req.body.donEmail;
-    let msg=req.body.donMsg;
     let name=req.body.donName;
-    let datedonated=new Date();
-    Donation.create({
-        amount,
+    let msg=req.body.donMsg;
+
+    var date= new Date();
+    let dateDonate=date.toLocaleDateString("en-sg");
+    
+    payup.create({
+        amt,
         email,
-        msg,
         name,
-        datedonated})
-        .then(
-            res.redirect("./dankeDonation") //danke.handlebars
-        )
+        msg,
+        dateDonate
+        
+    })
+    .then(()=>{
+        res.redirect("./ThanksForSupporting");
+    })
 });
 module.exports=router;

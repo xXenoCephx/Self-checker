@@ -1,0 +1,19 @@
+<div class="container">
+    <div class="col-lg-2 col-md-2 col-sm-12"></div>
+    <div class="col-lg-5 col-md-5 col-sm-12">
+        {{#each post}}
+            <div class="row mb-2">
+                <a href="/community/question/{{id}}"><table class="tables">
+                    <tr><th>{{title}}</th><td>{{type}}</td><td class="date">Posted on: {{formatDate date "DD/MM/YYYY"}}</td></tr>
+                    <tr><td colspan="3" class="showtext">{{text}}</td></tr></table></a>
+                <br>
+            </div>
+        {{/each}}
+    </div>
+    <div class="col-lg-4 col-md-4 col-sm-12">
+        <table>
+            <tr><td><a href="/community/create">Create</a></td></tr>
+            <tr><td><a href="/community/feedback">Feedback</a></td></tr>
+        </table>
+    </div>
+</div>
